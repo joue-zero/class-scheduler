@@ -1,7 +1,9 @@
 import {useMainContext} from "../Context/MainContextProvider.jsx";
 import {getClassesAndLabDetails} from "../utils/class-details.js";
 import {addMinutes, parse, format} from "date-fns";
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
+import html2canvas from "html2canvas-pro";
+import jsPDF from "jspdf";
 
 const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
@@ -41,6 +43,7 @@ const isClassInTimeSlot = (classSlot, slotStart, slotEnd) => {
 const TimeTable = () => {
     const {currentSchedule, classes} = useMainContext();
     const schedules = getClassesAndLabDetails(classes, currentSchedule.selections);
+    const tableRef = useRef(null);
     const [timeFilter, setTimeFilter] = useState({
         timeInterval: TIME_INTERVAL
     });
@@ -48,16 +51,35 @@ const TimeTable = () => {
     useEffect(() => {
         setTimeSlots(generateTimeSlots(timeFilter.timeInterval));
     }, [timeFilter]);
-    const handleTimeIntervalChange = (e) => {
-        setTimeFilter({
-            timeInterval: e.target.value
-        });
-    }
+
+    // Function to download as Image
+    const downloadAsImage = async () => {
+        const canvas = await html2canvas(tableRef.current);
+        const image = canvas.toDataURL("image/png");
+
+        const link = document.createElement("a");
+        link.href = image;
+        link.download = "timetable.png";
+        link.click();
+    };
+
+    // Function to download as PDF
+    const downloadAsPDF = async () => {
+        const canvas = await html2canvas(tableRef.current);
+        const image = canvas.toDataURL("image/png");
+
+        const pdf = new jsPDF("l", "mm", "a4"); // Landscape mode
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+        pdf.addImage(image, "PNG", 0, 0, pdfWidth, pdfHeight);
+        pdf.save("timetable.pdf");
+    };
     return (
         <>
-            <div className="flex items-center justify-between mb-5">
+            <div className="flex items-center justify-between mb-5 flex-col sm:flex-row space-y-4">
                 <h2 className="text-2xl font-semibold">Class Schedule</h2>
-                <select className="border border-gray-300 rounded p-2"
+                <select className="border border-gray-300 rounded s:p-2 text-sm p-1 w-full sm:w-auto"
                         value={timeFilter.timeInterval}
                         onChange={(e) => setTimeFilter({...timeFilter, timeInterval: e.target.value})}
                 >
@@ -69,8 +91,16 @@ const TimeTable = () => {
                     <option value={120}>2 Hours</option>
                 </select>
             </div>
+            <div className="flex  gap-2 mb-4 flex-col sm:flex-row gap-y-2 sm:justify-end">
+                <button onClick={downloadAsImage} className="px-4 py-2 bg-blue-500 text-white rounded">
+                    Download as Image
+                </button>
+                <button onClick={downloadAsPDF} className="px-4 py-2 bg-green-500 text-white rounded">
+                    Download as PDF
+                </button>
+            </div>
             <div className="overflow-x-auto">
-                <table className="w-full border-collapse border border-gray-300">
+                <table ref={tableRef} className="w-full border-collapse border border-gray-300">
                     <thead>
                     <tr>
                         <th className="border border-gray-300 p-2 bg-gray-100">Day</th>
