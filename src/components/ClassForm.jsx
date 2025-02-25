@@ -9,7 +9,6 @@ export function ClassForm({ onSubmit, initialData }) {
     code: '',
     versions: [],
   });
-  console.log(initialData, "here");
   const addVersion = () => {
     const newVersion = {
       id: crypto.randomUUID(),

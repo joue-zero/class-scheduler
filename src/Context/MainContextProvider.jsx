@@ -456,30 +456,31 @@ export default function MainContextProvider({children}){
         ]
     );
     const [currentSchedule, setCurrentSchedule] = useState({
-        "selections":[]
+        "selections":
+            // []
 
-        //     [
-        //     {
-        //         "classId": "c34f80b9-0e2a-4b9f-8838-a95e4fd64eea",
-        //         "versionId": "26eeddc8-ed28-404e-8795-9cfdef4f9711",
-        //         "labId": "3ad486ab-bac5-4eb9-9c9a-119421a93486"
-        //     },
-        //     {
-        //         "classId": "7cb32d62-4301-4043-b3a5-59bef3cc5565",
-        //         "versionId": "810d5c69-192d-4349-97f8-8f7b909a4b6b",
-        //         "labId": "d94586f3-5252-42cf-9c48-90e903333db0"
-        //     },
-        //     {
-        //         "classId": "68f9f9d8-e4b4-49b4-addd-af72550971cb",
-        //         "versionId": "2d6e5158-a444-44d2-8b55-d70a36ee2025",
-        //         "labId": "8a9c2d0f-f7ce-41ab-a7f5-62c3175c25fb"
-        //     },
-        //     {
-        //         "classId": "a13694a2-07ce-46a8-aa56-3a9f9e345e67",
-        //         "versionId": "ef1571ca-e58f-48d2-bf96-261ec00802f6",
-        //         "labId": "6fc763c7-0935-49ce-98d7-94923672ac44"
-        //     }
-        // ]
+            [
+            {
+                "classId": "c34f80b9-0e2a-4b9f-8838-a95e4fd64eea",
+                "versionId": "26eeddc8-ed28-404e-8795-9cfdef4f9711",
+                "labId": "3ad486ab-bac5-4eb9-9c9a-119421a93486"
+            },
+            {
+                "classId": "7cb32d62-4301-4043-b3a5-59bef3cc5565",
+                "versionId": "810d5c69-192d-4349-97f8-8f7b909a4b6b",
+                "labId": "d94586f3-5252-42cf-9c48-90e903333db0"
+            },
+            {
+                "classId": "68f9f9d8-e4b4-49b4-addd-af72550971cb",
+                "versionId": "2d6e5158-a444-44d2-8b55-d70a36ee2025",
+                "labId": "8a9c2d0f-f7ce-41ab-a7f5-62c3175c25fb"
+            },
+            {
+                "classId": "a13694a2-07ce-46a8-aa56-3a9f9e345e67",
+                "versionId": "ef1571ca-e58f-48d2-bf96-261ec00802f6",
+                "labId": "6fc763c7-0935-49ce-98d7-94923672ac44"
+            }
+        ]
     });
 
     return (
