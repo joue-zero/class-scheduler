@@ -1,0 +1,8 @@
+
+This file will contains the some thinking / notes
+
+- i'm thinking to replace the filers with a class and provide this to the Recursive function that
+generate all the Schedules
+
+- so instead of do all checking inside the recursive function i will do it in the class and clean the code and give the
+ability to add more filters in the future
