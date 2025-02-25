@@ -7,4 +7,9 @@ export default defineConfig({
       react(),
       tailwindcss()
   ],
+    // base: '/class-scheduler/',
+    // build: {
+    //     outDir: './dist'
+    // }
+    base: './',
 })

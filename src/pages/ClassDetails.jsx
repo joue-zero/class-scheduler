@@ -1,10 +1,10 @@
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useMainContext} from "../Context/MainContextProvider.jsx";
 import {ClassForm} from "../components/ClassForm.jsx";
 
 export default function ClassDetails() {
     const {classId} = useParams();
-    console.log(classId);
+    const navigate = useNavigate();
     const {classes, setClasses} = useMainContext();
     const handleAddClass = (newClass) => {
         const existingClassIndex = classes.findIndex((classItem) => classItem.id === newClass.id);
@@ -15,6 +15,7 @@ export default function ClassDetails() {
             updatedClasses[existingClassIndex] = newClass;
         }
         setClasses(updatedClasses);
+        navigate("/");
     };
     const classItem = classes.filter((classItem) => classItem.id === classId)[0];
 

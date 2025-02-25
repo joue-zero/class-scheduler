@@ -32,6 +32,10 @@ const router = createBrowserRouter([
         ]
 
     }
-])
+],
+    {
+        basename: '/class-scheduler',
+    }
+)
 
 export default router;

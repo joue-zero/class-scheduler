@@ -5,11 +5,11 @@ const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 
 
 export function TimeSlotPicker({ timeSlot, onChange, onDelete }) {
   return (
-    <div className="flex items-center gap-4 p-2 bg-gray-50 rounded">
+    <div className="flex sm:items-center gap-2 sm:gap-4 p-2 bg-gray-50 rounded sm:flex-row flex-col  ">
       <select
         value={timeSlot.dayOfWeek}
         onChange={(e) => onChange({ ...timeSlot, dayOfWeek: parseInt(e.target.value) })}
-        className="rounded border-gray-300"
+        className="rounded border-gray-300 border px-2 py-1"
       >
         {DAYS.map((day, index) => (
           <option key={day} value={index}>
@@ -22,7 +22,7 @@ export function TimeSlotPicker({ timeSlot, onChange, onDelete }) {
         type="time"
         value={timeSlot.startTime}
         onChange={(e) => onChange({ ...timeSlot, startTime: e.target.value })}
-        className="rounded border-gray-300"
+        className="rounded border-gray-300 border px-2 py-1"
       />
 
       <span>to</span>
@@ -31,7 +31,7 @@ export function TimeSlotPicker({ timeSlot, onChange, onDelete }) {
         type="time"
         value={timeSlot.endTime}
         onChange={(e) => onChange({ ...timeSlot, endTime: e.target.value })}
-        className="rounded border-gray-300"
+        className="rounded border-gray-300 border px-2 py-1"
       />
       {onDelete && (
         <button
