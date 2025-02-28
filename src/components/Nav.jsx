@@ -43,11 +43,11 @@ function Nav() {
 
                 {/* Navigation Links */}
                 <div className={`${open? 'block' : 'hidden'} w-full md:block md:w-auto`} id="navbar-default">
-                    <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                    <ul className="font-medium flex flex-col sm:items-center p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                         <li>
                             <NavLink
                                 to="/"
-                                className={({ isActive }) =>
+                                className={({isActive}) =>
                                     `block py-2 px-3 rounded-sm md:p-0 hover:text-blue-500 ${isActive ? "text-blue-700 dark:text-blue-500" : "text-gray-900 dark:text-white"}`
                                 }
                             >
@@ -57,12 +57,20 @@ function Nav() {
                         <li>
                             <NavLink
                                 to="/my-schedule"
-                                className={({ isActive }) =>
+                                className={({isActive}) =>
                                     `block py-2 px-3 rounded-sm md:p-0 hover:text-blue-500 ${isActive ? "text-blue-700 dark:text-blue-500" : "text-gray-900 dark:text-white"}`
                                 }
                             >
                                 My Schedule
                             </NavLink>
+                        </li>
+                        <li>
+                            <a href="https://buymeacoffee.com/youssef.elnaggar"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               className="bg-yellow-400 text-black px-4 py-2 rounded-lg font-semibold hover:bg-yellow-500 mt-1 md:mt-0 inline-block">
+                                ☕ Buy Me a Coffee
+                            </a>
                         </li>
                     </ul>
                 </div>

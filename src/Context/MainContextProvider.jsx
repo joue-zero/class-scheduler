@@ -11,8 +11,9 @@ export default function MainContextProvider({children}){
         [
             {
                 "id": "c34f80b9-0e2a-4b9f-8838-a95e4fd64eea",
-                "name": "Computation",
-                "code": "c",
+                // "name": "Computation",
+                "name": "Class1",
+                "code": "CS1805",
                 "versions": [
                     {
                         "id": "26eeddc8-ed28-404e-8795-9cfdef4f9711",
@@ -122,8 +123,9 @@ export default function MainContextProvider({children}){
             },
             {
                 "id": "7cb32d62-4301-4043-b3a5-59bef3cc5565",
-                "name": "Security",
-                "code": "s",
+                // "name": "Security",
+                "name": "Class2",
+                "code": "CS1806",
                 "versions": [
                     {
                         "id": "810d5c69-192d-4349-97f8-8f7b909a4b6b",
@@ -233,8 +235,9 @@ export default function MainContextProvider({children}){
             },
             {
                 "id": "68f9f9d8-e4b4-49b4-addd-af72550971cb",
-                "name": "Distributed",
-                "code": "d",
+                // "name": "Distributed",
+                "name": "Class3",
+                "code": "CS1809",
                 "versions": [
                     {
                         "id": "2d6e5158-a444-44d2-8b55-d70a36ee2025",
@@ -345,7 +348,7 @@ export default function MainContextProvider({children}){
             {
                 "id": "a13694a2-07ce-46a8-aa56-3a9f9e345e67",
                 "name": "Problem Solving",
-                "code": "p",
+                "code": "PS141",
                 "versions": [
                     {
                         "id": "ef1571ca-e58f-48d2-bf96-261ec00802f6",
