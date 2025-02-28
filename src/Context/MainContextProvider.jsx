@@ -458,11 +458,9 @@ export default function MainContextProvider({children}){
             }
         ]
     );
-    const [currentSchedule, setCurrentSchedule] = useState({
-        "selections":
+    const [currentSchedule, setCurrentSchedule] = useState(
             // []
-
-            [
+        [
             {
                 "classId": "c34f80b9-0e2a-4b9f-8838-a95e4fd64eea",
                 "versionId": "26eeddc8-ed28-404e-8795-9cfdef4f9711",
@@ -484,7 +482,7 @@ export default function MainContextProvider({children}){
                 "labId": "6fc763c7-0935-49ce-98d7-94923672ac44"
             }
         ]
-    });
+    );
 
     return (
         <MainContext.Provider value={{

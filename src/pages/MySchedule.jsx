@@ -42,7 +42,7 @@ const isClassInTimeSlot = (classSlot, slotStart, slotEnd) => {
 
 const TimeTable = () => {
     const {currentSchedule, classes} = useMainContext();
-    const schedules = getClassesAndLabDetails(classes, currentSchedule.selections);
+    const schedules = getClassesAndLabDetails(classes, currentSchedule);
     const tableRef = useRef(null);
     const [timeFilter, setTimeFilter] = useState({
         timeInterval: TIME_INTERVAL

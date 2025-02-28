@@ -16,7 +16,7 @@ export function ScheduleDisplay({ schedule, classes, onSelect }) {
   return (
     <div className="border rounded-lg p-4 bg-white shadow-sm hover:shadow-md transition-shadow">
       <div className="space-y-4">
-        {schedule.selections.map(selection => {
+        {schedule.map(selection => {
           const details = getClassDetails(
             classes,
             selection.classId,

@@ -4,8 +4,8 @@ import { ScheduleDisplay } from './ScheduleDisplay.jsx';
 import {useMainContext} from "../Context/MainContextProvider.jsx";
 
 
-export default function ScheduleBuilder({ classes, onScheduleChange }) {
-  const {setCurrentSchedule} = useMainContext();
+export default function ScheduleBuilder() {
+  const {setCurrentSchedule, classes} = useMainContext();
   const [possibleSchedules, setPossibleSchedules] = useState([]);
   const [showingPossibilities, setShowingPossibilities] = useState(false);
   const [filters, setFilters] = useState({
@@ -17,6 +17,7 @@ export default function ScheduleBuilder({ classes, onScheduleChange }) {
 
   const generateSchedules = () => {
     const schedules = generatePossibleSchedules(classes, filters);
+    console.log(schedules);
     setPossibleSchedules(schedules);
     setShowingPossibilities(true);
   };
