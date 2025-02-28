@@ -1,9 +1,10 @@
 import {useMainContext} from "../Context/MainContextProvider.jsx";
-import {getClassesAndLabDetails} from "../utils/class-details.js";
+import { getAllClassesDetails} from "../utils/class-details.js";
 import {addMinutes, parse, format} from "date-fns";
 import {useEffect, useRef, useState} from "react";
 import html2canvas from "html2canvas-pro";
 import jsPDF from "jspdf";
+import {formatTime} from "../utils/timeUtils.js";
 
 const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
@@ -42,7 +43,8 @@ const isClassInTimeSlot = (classSlot, slotStart, slotEnd) => {
 
 const TimeTable = () => {
     const {currentSchedule, classes} = useMainContext();
-    const schedules = getClassesAndLabDetails(classes, currentSchedule);
+    const schedules = getAllClassesDetails(classes, currentSchedule);
+
     const tableRef = useRef(null);
     const [timeFilter, setTimeFilter] = useState({
         timeInterval: TIME_INTERVAL
@@ -77,6 +79,7 @@ const TimeTable = () => {
     };
     return (
         <>
+            {/*Filter by time interval*/}
             <div className="flex items-center justify-between mb-5 flex-col sm:flex-row space-y-4">
                 <h2 className="text-2xl font-semibold">Class Schedule</h2>
                 <select className="border border-gray-300 rounded s:p-2 text-sm p-1 w-full sm:w-auto"
@@ -91,6 +94,7 @@ const TimeTable = () => {
                     <option value={120}>2 Hours</option>
                 </select>
             </div>
+            {/*Download buttons*/}
             <div className="flex  gap-2 mb-4 flex-col sm:flex-row gap-y-2 sm:justify-end">
                 <button onClick={downloadAsImage} className="px-4 py-2 bg-blue-500 text-white rounded">
                     Download as Image
@@ -99,6 +103,7 @@ const TimeTable = () => {
                     Download as PDF
                 </button>
             </div>
+            { /*Display Time Table */}
             <div className="overflow-x-auto">
                 <table ref={tableRef} className="w-full border-collapse border border-gray-300">
                     <thead>
@@ -118,12 +123,12 @@ const TimeTable = () => {
                         <tr key={dayIndex}>
                             <td className="border border-gray-300 p-2 bg-gray-50">{day}</td>
                             {timeSlots.map((slot, timeIndex) => {
-                                const classData = schedules.find(({timeSlots, lab}) =>
-                                    [...timeSlots, ...(lab?.timeSlots || [])].some(
-                                        ts =>
-                                            ts.dayOfWeek === dayIndex &&
-                                            isClassInTimeSlot(ts, slot.startTime, slot.endTime)
-                                    )
+                                // get the class data for the current time slot
+                                const classData = schedules.find(
+                                    ({timeSlots}) =>
+                                        timeSlots.some(
+                                            ts => ts.dayOfWeek === dayIndex && isClassInTimeSlot(ts, slot.startTime, slot.endTime)
+                                        )
                                 );
                                 return (
                                     <td
@@ -131,20 +136,29 @@ const TimeTable = () => {
                                         className="border border-gray-300 p-2 text-center min-w-[100px]"
                                     >
                                         {classData ? (
-                                            <div className="bg-blue-500 text-white rounded p-1 text-xs">
-                                                {classData.name}
-                                                <br/>
-                                                ({classData.professor})
-                                                <br/>
+                                            <div className={`${classData.isLab ? 'bg-green-500' : 'bg-blue-500'} text-white rounded p-1 text-xs`}>
+                                                {classData.isLab &&
+                                                <>
+                                                    <p> {classData.className} </p>
+                                                    <p> {classData.name} </p>
+                                                    <p>Lab</p>
+                                                </>
+                                                }
+                                                {!classData.isLab && <>
+                                                    <p> {classData.name}</p>
+                                                    <p>({classData.professor}) </p>
+                                                    <p>lecture</p>
+                                                </>}
+
                                                 {classData.timeSlots
                                                     .filter(
                                                         ({dayOfWeek}) => dayOfWeek === dayIndex
-                                                    )
-                                                    .map(({startTime, endTime}, index) => (
-                                                        <div key={index}>
-                                                            {startTime} - {endTime}
-                                                        </div>
-                                                    ))}
+                                                        )
+                                                        .map(({startTime, endTime}, index) => (
+                                                            <p key={index} className="text-nowrap">
+                                                                {formatTime(startTime)} - {formatTime(endTime)}
+                                                            </p>
+                                                        ))}
                                             </div>
                                         ) : null}
                                     </td>

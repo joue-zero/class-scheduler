@@ -17,7 +17,6 @@ export default function ScheduleBuilder() {
 
   const generateSchedules = () => {
     const schedules = generatePossibleSchedules(classes, filters);
-    console.log(schedules);
     setPossibleSchedules(schedules);
     setShowingPossibilities(true);
   };

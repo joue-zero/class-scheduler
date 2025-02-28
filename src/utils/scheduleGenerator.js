@@ -38,11 +38,11 @@ function hasConflictsInSchedule(schedule) {
 
   // TODO this can be  omitted -> given the fact that the Class times Can't conflict with the its own Lab times
 
-  // for (const version of schedule) {
-  //   if (hasInternalConflicts(version)) {
-  //     return true;
-  //   }
-  // }
+  for (const version of schedule) {
+    if (hasInternalConflicts(version)) {
+      return true;
+    }
+  }
 
   // Check conflicts between different versions
   for (let i = 0; i < schedule.length; i++) {
@@ -83,7 +83,7 @@ function getLabDaysOfSchedule(schedule) {
 
 export function generatePossibleSchedules(classes, filters) {
   const possibleSchedules = [];
-  console.log(classes);
+  // console.log(classes);
   const generateCombinations = (
     currentSchedule,
     remainingClasses
@@ -148,9 +148,9 @@ export function generatePossibleSchedules(classes, filters) {
 
           // TODO this can be  omitted -> given the fact that the Class times Can't conflict with the its own Lab times
           // Skip this combination if there's an internal conflict
-          // if (!hasInternalConflicts(versionWithLab)) {
+          if (!hasInternalConflicts(versionWithLab)) {
             generateCombinations([...currentSchedule, versionWithLab], nextClasses);
-          // }
+          }
         }
       } else {
         generateCombinations([...currentSchedule, versionWithTimes], nextClasses);
@@ -161,4 +161,3 @@ export function generatePossibleSchedules(classes, filters) {
   generateCombinations([], classes);
   return possibleSchedules;
 }
-// امير فاتحى حجر + 2 طفل + زوجتة توفيت

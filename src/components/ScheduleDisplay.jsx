@@ -1,28 +1,14 @@
 
-import { format } from 'date-fns';
 import {getClassDetails} from "../utils/class-details.js";
-
+import {formatTime} from "../utils/timeUtils.js";
 
 export function ScheduleDisplay({ schedule, classes, onSelect }) {
-
-
-  const formatTime = (time) => {
-    const date = new Date();
-    const [hours, minutes] = time.split(':');
-    date.setHours(parseInt(hours), parseInt(minutes));
-    return format(date, 'h:mm a');
-  };
 
   return (
     <div className="border rounded-lg p-4 bg-white shadow-sm hover:shadow-md transition-shadow">
       <div className="space-y-4">
         {schedule.map(selection => {
-          const details = getClassDetails(
-            classes,
-            selection.classId,
-            selection.versionId,
-            selection.labId
-          );
+          const details = getClassDetails(classes, selection);
           
           if (!details) return null;
 

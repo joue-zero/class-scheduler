@@ -1,4 +1,4 @@
-import {parse, areIntervalsOverlapping} from 'date-fns';
+import {parse, areIntervalsOverlapping, format} from 'date-fns';
 
 export function parseTimeSlot(timeSlot, baseDate) {
   const start = parse(timeSlot.startTime, 'HH:mm', baseDate);
@@ -17,13 +17,7 @@ export function hasTimeConflict(slot1, slot2) {
   return areIntervalsOverlapping(interval1, interval2);
 }
 
-export function validateSchedule(schedule) {
-  for (let i = 0; i < schedule.length; i++) {
-    for (let j = i + 1; j < schedule.length; j++) {
-      if (hasTimeConflict(schedule[i], schedule[j])) {
-        return false;
-      }
-    }
-  }
-  return true;
+
+export function formatTime(time) {
+  return format(parse(time, "HH:mm", new Date()), "h:mm a")
 }
