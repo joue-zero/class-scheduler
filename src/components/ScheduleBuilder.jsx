@@ -1,9 +1,11 @@
 import  { useState } from 'react';
 import { generatePossibleSchedules } from '../utils/scheduleGenerator';
 import { ScheduleDisplay } from './ScheduleDisplay.jsx';
+import {useMainContext} from "../Context/MainContextProvider.jsx";
 
 
 export default function ScheduleBuilder({ classes, onScheduleChange }) {
+  const {setCurrentSchedule} = useMainContext();
   const [possibleSchedules, setPossibleSchedules] = useState([]);
   const [showingPossibilities, setShowingPossibilities] = useState(false);
   const [filters, setFilters] = useState({
@@ -20,7 +22,7 @@ export default function ScheduleBuilder({ classes, onScheduleChange }) {
   };
 
   const selectSchedule = (schedule) => {
-    onScheduleChange(schedule);
+    setCurrentSchedule(schedule);
     setShowingPossibilities(false);
   };
 

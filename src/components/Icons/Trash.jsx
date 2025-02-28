@@ -1,6 +1,6 @@
 
 
-export default function Trash2({ className, onClick }) {
+export default function Trash({ className, onClick }) {
   return (
     <svg
         onClick={onClick}

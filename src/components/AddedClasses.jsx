@@ -1,6 +1,6 @@
 import {useMainContext} from "../Context/MainContextProvider.jsx";
 import {Link} from "react-router-dom";
-import Trash2 from "./Trash2.jsx";
+import Trash from "./Icons/Trash.jsx";
 
 export default function AddedClasses() {
     const {classes, setClasses, currentSchedule, setCurrentSchedule} = useMainContext();
@@ -8,9 +8,9 @@ export default function AddedClasses() {
         const previousClasses = [...classes];
         const updatedClasses = previousClasses.filter((classItem) => classItem.id !== classId);
         setClasses(updatedClasses);
-        const updatedSelection = currentSchedule.selections.filter((classItem) => classItem.classId !== classId);
+        // const updatedSelection = currentSchedule.selections.filter((classItem) => classItem.classId !== classId);
         setCurrentSchedule({
-            selections: updatedSelection
+            selections: []
         });
     }
     return (
@@ -22,7 +22,7 @@ export default function AddedClasses() {
                         <Link to={`/class/${classItem.id}`} className="text-blue-500 hover:underline">
                             {classItem.name}
                         </Link>
-                        <Trash2
+                        <Trash
                             onClick={() => handleRemoveClass(classItem.id)}
                             className='cursor-pointer'
                         />
