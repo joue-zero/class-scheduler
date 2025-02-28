@@ -4,22 +4,18 @@ import ScheduleBuilder  from './components/ScheduleBuilder.jsx';
 import { useMainContext } from './Context/MainContextProvider.jsx';
 import AddedClasses  from './components/AddedClasses';
 function App() {
-  const {classes, setClasses, setCurrentSchedule} = useMainContext();
   const [isAddingClass, setIsAddingClass] = useState(false);
-
+  const { classes, setClasses } = useMainContext();
   const handleAddClass = (newClass) => {
     setClasses([...classes, newClass]);
     setIsAddingClass(false);
   };
 
-  const handleScheduleChange = (schedule) => {
-    setCurrentSchedule(schedule);
-  };
+
 
   return (
       <>
           <h1 className="text-3xl font-bold text-gray-900 mb-8">Class Scheduler</h1>
-
           <div className="space-y-8">
             {isAddingClass ? (
               <div className="bg-white shadow rounded-lg p-6">
@@ -52,10 +48,7 @@ function App() {
                 {classes.length == 0 ? (
                   <p className="text-gray-600 mb-4">Select the classes you want to take and build your schedule.</p>
                 ) :
-                <ScheduleBuilder
-                  classes={classes}
-                  onScheduleChange={handleScheduleChange}
-                />}
+                <ScheduleBuilder />}
               </div>
 
           </div>

@@ -83,7 +83,7 @@ function getLabDaysOfSchedule(schedule) {
 
 export function generatePossibleSchedules(classes, filters) {
   const possibleSchedules = [];
-  
+  console.log(classes);
   const generateCombinations = (
     currentSchedule,
     remainingClasses
@@ -118,13 +118,12 @@ export function generatePossibleSchedules(classes, filters) {
           return;
         }
 
-        possibleSchedules.push({
-          selections: currentSchedule.map(v => ({
+        possibleSchedules.push(currentSchedule.map(v => ({
             classId: v.classId,
             versionId: v.versionId,
             labId: v.labId
           }))
-        });
+        );
       }
       return;
     }
